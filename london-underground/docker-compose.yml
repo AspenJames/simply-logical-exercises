@@ -1,4 +1,7 @@
 version: "3.8"
 services:
   pl:
-    build: .
+    image: swipl:8.4.2
+    command: ["swipl", "/usr/src/london_underground.pl"]
+    volumes:
+      - .:/usr/src
