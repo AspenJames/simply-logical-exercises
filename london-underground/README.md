@@ -4,6 +4,16 @@
 
 > From _Simply Logical_, Figure 1.1
 
+## Running
+
+This program may be run with `docker compose` for convenience:
+
+    $ docker compose run --rm pl
+
+If you have `swipl` installed on your system, you may run the program directly:
+
+    $ swipl london_underground.pl
+
 ## Exercise 1.1
 
 I took a bit of a different approach from what is shown in the book to set up
