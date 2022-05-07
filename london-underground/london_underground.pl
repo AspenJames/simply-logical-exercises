@@ -22,22 +22,28 @@
 
 % connected(StationA, StationB, Line).
 % connection(StationA, StationB, Line) creates the inverse connection relation.
-connected(A,B,L) :- connection(A,B,L);
-                    connection(B,A,L).
+connected(A,B,L) :-
+  ( connection(A,B,L)
+  ; connection(B,A,L)
+  ).
 
 % nearby(StationA, StationB).
 % Stations are nearby if connected; or on same line and one stop apart.
-nearby(A,B) :- connected(A,B,_);
-               connected(A,C,L),
-               connected(C,B,L),
-               dif(A, B).
+nearby(A,B) :-
+  ( connected(A,B,_)
+  ; connected(A,C,L),
+    connected(C,B,L),
+    dif(A, B)
+  ).
 
 % not_too_far(StationA, StationB).
 % Stations are not too far if connected or one stop apart, regardless of line.
-not_too_far(A,B) :- connected(A,B,_);
-                    connected(A,C,_),
-                    connected(C,B,_),
-                    dif(A, B).
+not_too_far(A,B) :-
+  ( connected(A,B,_)
+  ; connected(A,C,_),
+    connected(C,B,_),
+    dif(A, B)
+  ).
 
 % London Underground connection data, as per figure.
 % connection/3 helper used to succintly map inverse relations.
