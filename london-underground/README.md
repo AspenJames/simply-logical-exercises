@@ -44,3 +44,14 @@ I also am not fully familiar with Prolog's module system, but am trying to start
 with good habits! SWI-Prolog's [reference
 documentation](https://www.swi-prolog.org/pldoc/man?section=whymodules) is where
 I'll be diving in for that!
+
+## Nearby / Not Too Far
+
+The rules for `nearby/2` and `not_too_far/2` are quite similar -- `nearby` cares
+about the Line on which stations are connected, whereas `not_too_far` doesn't.
+Both rules needed to specify that their arguments are different, so we can avoid
+returning the target station in a query -- `nearby(bond_street, B).` where `B = bond_street` is not a very helpful fact!
+
+There are also rules for finding all stations nearby or not_too_far from a given
+station. These utilize `setof` to solve all queries and return sorted, unique
+results.

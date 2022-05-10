@@ -16,7 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-:- module(london_underground, [connected/3,
+:- module(london_underground, [all_nearby/2,
+                               all_not_too_far/2,
+                               connected/3,
                                nearby/2,
                                not_too_far/2]).
 
@@ -36,6 +38,10 @@ nearby(A,B) :-
     dif(A, B)
   ).
 
+% all_nearby(StationA, Stations)
+% Returns a sorted set of all Stations nearby StationA.
+all_nearby(A,Bs) :- setof(B, nearby(A,B), Bs).
+
 % not_too_far(StationA, StationB).
 % Stations are not too far if connected or one stop apart, regardless of line.
 not_too_far(A,B) :-
@@ -44,6 +50,10 @@ not_too_far(A,B) :-
     connected(C,B,_),
     dif(A, B)
   ).
+
+% all_not_too_far(StationA, Stations)
+% Returns a sorted set of all Stations that are not_too_far from StationA.
+all_not_too_far(A,Bs) :- setof(B, not_too_far(A,B), Bs).
 
 % London Underground connection data, as per figure.
 % connection/3 helper used to succintly map inverse relations.
